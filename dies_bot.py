@@ -61,7 +61,7 @@ def del_filter(commands):
     if not commands.data in ['del', 'Delete', 'one', 'two', 'three', 'four', 'five', 'mus_back', 
     'one_bey', 'two_bey', 'one_kajiri', 'two_kajiri', 'three_kajiri', 'four_kajiri']:
         bot.delete_message(commands.message.chat.id, commands.message.message_id)
-    elif commands.data == 'Delete':
+    if commands.data == 'Delete':
         bot.delete_message(commands.message.chat.id, commands.message.message_id)
 
 
@@ -70,7 +70,7 @@ def inline(commands):
     del_filter(commands)
     if commands.data == 'menu':
         dies_help(commands.message)
-    elif commands.data == 'Saosyant-Desatir':
+    if commands.data == 'Saosyant-Desatir':
         send_character_page(commands.message)
     evil_kings_btn(commands)
     music_btn(commands)

@@ -193,25 +193,25 @@ def dies_gods(message):
 def gods_btn(commands):
     if commands.data == 'Divine':
         dies_gods(commands)
-    elif commands.data == 'Atman':
+    if commands.data == 'Atman':
         atman(commands)                                                               
-    elif commands.data == 'Remorseless':
+    if commands.data == 'Remorseless':
         remorseless(commands)
-    elif commands.data == 'Morningstar':
+    if commands.data == 'Morningstar':
         morningstar(commands)
-    elif commands.data == 'Mercurius':
+    if commands.data == 'Mercurius':
         mercurius(commands)
-    elif commands.data == 'Twilight':
+    if commands.data == 'Twilight':
         twilight(commands)
-    elif commands.data == 'Hajun':
+    if commands.data == 'Hajun':
         hajun(commands)
-    elif commands.data == 'Amaterasu':
+    if commands.data == 'Amaterasu':
         amaterasu(commands)
-    elif commands.data == 'Zarathustra':
+    if commands.data == 'Zarathustra':
         zarathustra(commands)
-    elif commands.data == 'Mephistopheles':
+    if commands.data == 'Mephistopheles':
         mephistopheles(commands)
-    elif commands.data == 'Back':
+    if commands.data == 'Back':
         dies_gods(commands)
     
 def saosyant_btn(commands):

@@ -66,22 +66,22 @@ def fabula_song(message, page=1):
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         fabula_btn(message, page)
-    elif page == 2:
+    if page == 2:
         for music in db[10:20]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         fabula_btn(message, page)
-    elif page == 3:
+    if page == 3:
         for music in db[20:30]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         fabula_btn(message, page)
-    elif page == 4:
+    if page == 4:
         for music in db[30:40]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         fabula_btn(message, page)
-    elif page == 5:
+    if page == 5:
         for music in db[40:50]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
@@ -123,7 +123,7 @@ def bey_song(message, page=1):
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         bey_btn(message, page)
-    elif page == 2:
+    if page == 2:
         for music in db[10:20]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
@@ -138,17 +138,17 @@ def kajiri_song(message, page=1):
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         kajiri_btn(message, page)
-    elif page == 2:
+    if page == 2:
         for music in db[10:20]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         kajiri_btn(message, page)
-    elif page == 3:
+    if page == 3:
         for music in db[20:30]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
         kajiri_btn(message, page)
-    elif page == 4:
+    if page == 4:
         for music in db[30:40]:
             media.append(InputMediaAudio(media=music))
         bot.send_media_group(chat_id, media=media)
@@ -166,50 +166,50 @@ def music_btn(commands):
     if commands.data == 'mus_back':
         albums(commands.message)
         del_funk(commands)
-    elif commands.data == 'music':
+    if commands.data == 'music':
         albums(commands.message)
-    elif commands.data == 'Fabula_Song':
+    if commands.data == 'Fabula_Song':
         fabula_song(commands.message)
-    elif commands.data == 'Zarathustra_Song':
+    if commands.data == 'Zarathustra_Song':
         zarathustra_song(commands.message)
-    elif commands.data == 'Amantes_Song':
+    if commands.data == 'Amantes_Song':
         amantes_song(commands.message)
-    elif commands.data == 'Bey_Song':
+    if commands.data == 'Bey_Song':
         bey_song(commands.message)
-    elif commands.data == 'Kajiri_cong':
+    if commands.data == 'Kajiri_cong':
         kajiri_song(commands.message)
-    elif commands.data == 'one':
+    if commands.data == 'one':
         fabula_song(commands.message, page=1)
         del_funk(commands)
-    elif commands.data == 'two':
+    if commands.data == 'two':
         fabula_song(commands.message, page=2)
         del_funk(commands)
-    elif commands.data == 'three':
+    if commands.data == 'three':
         fabula_song(commands.message, page=3)
         del_funk(commands)
-    elif commands.data == 'four':
+    if commands.data == 'four':
         fabula_song(commands.message, page=4)
         del_funk(commands)
-    elif commands.data == 'five':
+    if commands.data == 'five':
         fabula_song(commands.message, page=5)
         del_funk(commands)
-    elif commands.data == 'one_bey':
+    if commands.data == 'one_bey':
         bey_song(commands.message, page=1)
         del_funk(commands)
-    elif commands.data == 'two_bey':
+    if commands.data == 'two_bey':
         bey_song(commands.message, page=2) 
         del_funk(commands)
-    elif commands.data == 'one_kajiri':
+    if commands.data == 'one_kajiri':
         kajiri_song(commands.message, page=1) 
         del_funk(commands)
-    elif commands.data == 'two_kajiri':
+    if commands.data == 'two_kajiri':
         kajiri_song(commands.message, page=2) 
         del_funk(commands)
-    elif commands.data == 'three_kajiri':
+    if commands.data == 'three_kajiri':
         kajiri_song(commands.message, page=3)
         del_funk(commands)
-    elif commands.data == 'four_kajiri':
+    if commands.data == 'four_kajiri':
         kajiri_song(commands.message, page=4) 
         del_funk(commands)
-    elif commands.data == 'del':
+    if commands.data == 'del':
         del_funk(commands)

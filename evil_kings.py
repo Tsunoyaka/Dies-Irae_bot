@@ -122,19 +122,19 @@ def aka_manah(message):
 def evil_kings_btn(commands):
     if commands.data == 'Back_Evil':
         evil_kings(commands.message)
-    elif commands.data == 'Evil_Kings':
+    if commands.data == 'Evil_Kings':
         evil_kings(commands.message)
-    elif commands.data == 'Khvarenah':
+    if commands.data == 'Khvarenah':
         khvarenah(commands.message)
-    elif commands.data == 'Bahlavan':
+    if commands.data == 'Bahlavan':
         bahlavan(commands.message)
-    elif commands.data == 'Nadare':
+    if commands.data == 'Nadare':
         nadare(commands.message)
-    elif commands.data == 'Frederica':
+    if commands.data == 'Frederica':
         frecerica(commands.message)
-    elif commands.data == 'Mashyana':
+    if commands.data == 'Mashyana':
         mashyana(commands.message)
-    elif commands.data == 'Kaikhosru':
+    if commands.data == 'Kaikhosru':
         kaikhosru(commands.message)
-    elif commands.data == 'Aka-Manah':
+    if commands.data == 'Aka-Manah':
         aka_manah(commands.message)
