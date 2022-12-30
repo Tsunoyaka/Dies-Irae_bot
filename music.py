@@ -164,8 +164,8 @@ def del_funk(commands):
 
 def music_btn(commands):
     if commands.data == 'mus_back':
-        del_funk(commands)
         albums(commands.message)
+        del_funk(commands)
     elif commands.data == 'music':
         albums(commands.message)
     elif commands.data == 'Fabula_Song':
@@ -179,37 +179,37 @@ def music_btn(commands):
     elif commands.data == 'Kajiri_cong':
         kajiri_song(commands.message)
     elif commands.data == 'one':
-        del_funk(commands)
         fabula_song(commands.message, page=1)
+        del_funk(commands)
     elif commands.data == 'two':
-        del_funk(commands)
         fabula_song(commands.message, page=2)
+        del_funk(commands)
     elif commands.data == 'three':
-        del_funk(commands)
         fabula_song(commands.message, page=3)
+        del_funk(commands)
     elif commands.data == 'four':
-        del_funk(commands)
         fabula_song(commands.message, page=4)
+        del_funk(commands)
     elif commands.data == 'five':
-        del_funk(commands)
         fabula_song(commands.message, page=5)
+        del_funk(commands)
     elif commands.data == 'one_bey':
-        del_funk(commands)
         bey_song(commands.message, page=1)
+        del_funk(commands)
     elif commands.data == 'two_bey':
-        del_funk(commands)
         bey_song(commands.message, page=2) 
+        del_funk(commands)
     elif commands.data == 'one_kajiri':
-        del_funk(commands)
         kajiri_song(commands.message, page=1) 
+        del_funk(commands)
     elif commands.data == 'two_kajiri':
-        del_funk(commands)
         kajiri_song(commands.message, page=2) 
+        del_funk(commands)
     elif commands.data == 'three_kajiri':
-        del_funk(commands)
         kajiri_song(commands.message, page=3)
-    elif commands.data == 'four_kajiri':
         del_funk(commands)
+    elif commands.data == 'four_kajiri':
         kajiri_song(commands.message, page=4) 
+        del_funk(commands)
     elif commands.data == 'del':
         del_funk(commands)
