@@ -164,8 +164,8 @@ def del_funk(commands):
 
 def music_btn(commands):
     if commands.data == 'mus_back':
-        del_funk(commands)
         albums(commands.message)
+        del_funk(commands)
     elif commands.data == 'music':
         albums(commands.message)
     elif commands.data == 'Fabula_Song':
