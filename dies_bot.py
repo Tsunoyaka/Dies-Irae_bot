@@ -9,7 +9,8 @@ from evil_kings import evil_kings_btn
 from get_db import (
     get_db,
     write_db,
-    get_photo_yazata
+    get_photo_yazata,
+    get_id
 )
 from music import music_btn
 from decouple import config
@@ -65,6 +66,19 @@ def del_filter(commands):
         bot.delete_message(commands.message.chat.id, commands.message.message_id)
 
 
+def my_userdb(message):
+    user_db = get_db('my_users')
+    chat_id = message.chat.id
+    id_ = get_id(message)
+    if id_ is None:
+        obj = {
+            'chat_id': chat_id,
+            'username': message.chat.username
+        }
+        user_db.append(obj)
+        write_db('my_users', user_db)
+
+
 @bot.callback_query_handler(func=lambda commands:True)
 def inline(commands):
     del_filter(commands)
@@ -76,6 +90,7 @@ def inline(commands):
     music_btn(commands)
     gods_btn(commands)
     saosyant_btn(commands)
+    my_userdb(commands.message)
 
 
 bot.polling(none_stop=True, interval=0)

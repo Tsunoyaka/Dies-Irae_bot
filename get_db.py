@@ -25,4 +25,9 @@ def get_album(db):
     with open(f'MUSIC/{db}.json', 'r') as file:
         return json.load(file)
 
-
+def get_id(message):
+    user_id = message.chat.id
+    data = get_db('my_users')
+    for id_ in data:
+        if id_['chat_id'] == user_id:
+            return id_
