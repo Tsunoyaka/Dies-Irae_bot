@@ -74,6 +74,7 @@ def my_userdb(message):
         obj = {
             'chat_id': chat_id,
             'username': message.chat.username
+            'first_name': message.chat.first_name
         }
         user_db.append(obj)
         write_db('my_users', user_db)
