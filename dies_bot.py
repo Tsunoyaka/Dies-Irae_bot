@@ -73,7 +73,7 @@ def my_userdb(message):
     if id_ is None:
         obj = {
             'chat_id': chat_id,
-            'username': message.chat.username
+            'username': message.chat.username,
             'first_name': message.chat.first_name
         }
         user_db.append(obj)
