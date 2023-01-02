@@ -40,7 +40,7 @@ def dies_help(message):
 @bot.message_handler(commands=['bot_users'])
 def bot_users(message):
     chat_id = message.chat.id
-    admin = config('ADMIN')
+    admin = int(config('ADMIN'))
     if chat_id == admin:
         users = get_user()
         user_len = len(get_db('my_users'))
