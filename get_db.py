@@ -31,3 +31,8 @@ def get_id(message):
     for id_ in data:
         if id_['chat_id'] == user_id:
             return id_
+
+
+def get_user():
+    with open(f'JSON/my_users.json', 'rb') as file:
+        return file.read()

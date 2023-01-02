@@ -10,7 +10,8 @@ from get_db import (
     get_db,
     write_db,
     get_photo_yazata,
-    get_id
+    get_id,
+    get_user
 )
 from music import music_btn
 from decouple import config
@@ -34,6 +35,18 @@ def dies_help(message):
     btn6 = InlineKeyboardButton('Скрыть', callback_data='skip')
     keyboard.add(btn1, btn2, btn3, btn4, btn5, btn6)
     bot.send_message(chat_id, 'Выберите нужный вам список:', reply_markup=keyboard)
+
+
+@bot.message_handler(commands=['bot_users'])
+def bot_users(message):
+    chat_id = message.chat.id
+    admin = config('ADMIN')
+    if chat_id == admin:
+        users = get_user()
+        user_len = len(get_db('my_users'))
+        bot.send_document(chat_id, document=users, visible_file_name='users.json', caption=f"Количество пользователей: {user_len}")
+    else:
+        bot.send_message(chat_id, 'Вы не имеете доступа к этой команде!')
 
 
 @bot.message_handler(commands=['Magsarion'])
