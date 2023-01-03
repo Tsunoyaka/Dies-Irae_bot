@@ -1,4 +1,4 @@
-import telebot
+from telebot import TeleBot
 from telebot.types import (
     InlineKeyboardMarkup, 
     InlineKeyboardButton
@@ -10,7 +10,7 @@ from get_db import (
 from decouple import config
 
 
-bot = telebot.TeleBot(config('TOKEN'))
+bot = TeleBot(config('TOKEN'))
 
 
 def evil_kings(message): 

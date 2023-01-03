@@ -1,4 +1,4 @@
-import telebot
+from telebot import TeleBot
 from telebot.types import (
     InlineKeyboardMarkup, 
     InlineKeyboardButton
@@ -17,7 +17,7 @@ from music import music_btn
 from decouple import config
 
 
-bot = telebot.TeleBot(config('TOKEN'))
+bot = TeleBot(config('TOKEN'))
 
 @bot.message_handler(commands=['start'])
 def welcome(message):

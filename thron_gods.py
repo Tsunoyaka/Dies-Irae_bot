@@ -4,12 +4,11 @@ from get_db import (
     get_db,
     get_photo
 )
-import telebot
+from telebot import TeleBot
 from decouple import config
 
 
-bot = telebot.TeleBot(config('TOKEN'))
-
+bot = TeleBot(config('TOKEN'))
 
 
 def characters_page_callback(call):
@@ -55,6 +54,8 @@ def send_character_page(message, page=1):
             parse_mode='Markdown',
             timeout=60
         )
+
+
 def atman(message):
     chat_id = message.message.chat.id
     db = get_db('throne')
@@ -157,7 +158,6 @@ def hajun(message):
             btn1 = InlineKeyboardButton('Назад', callback_data='Back')
             keyboard.add(btn1)
             bot.send_photo(chat_id, photo, caption=obj, parse_mode="Markdown", reply_markup=keyboard)
-
 
 
 def amaterasu(message):

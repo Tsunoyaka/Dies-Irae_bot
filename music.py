@@ -1,10 +1,31 @@
-import telebot
+from telebot import TeleBot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, InputMediaAudio
 from get_db import get_album
 from decouple import config
+from math import ceil
 
 
-bot = telebot.TeleBot(config('TOKEN'))
+bot = TeleBot(config('TOKEN'))
+
+
+def special_btn(chat_id, page, db, name):
+    pages = ceil(len(db)/10)
+    keyboard = InlineKeyboardMarkup(row_width=pages)
+    list_ = []
+    for pg in range(pages):
+        pg = InlineKeyboardButton(pg+1, callback_data=f"{name}:{pg+1}")
+        list_.append(pg)
+    keyboard.add(*list_)
+    btn6 = InlineKeyboardButton('Назад к альбомам', callback_data='mus_back')
+    keyboard.add(btn6)
+    bot.send_message(chat_id, f'Вы находитесь на {page} странице', reply_markup=keyboard)
+
+
+def group_media(chat_id, page, db):
+    media = []
+    for music in db[page*10-10:page*10]:
+        media.append(InputMediaAudio(media=music))
+    bot.send_media_group(chat_id, media=media)
 
 
 def albums(message):
@@ -20,72 +41,11 @@ def albums(message):
     bot.send_message(chat_id, 'Выберите альбом:', reply_markup=keyboard)
 
 
-def fabula_btn(message, page=1):
-    chat_id = message.chat.id
-    keyboard = InlineKeyboardMarkup(row_width=5)
-    btn1 = InlineKeyboardButton('1', callback_data='one')
-    btn2 = InlineKeyboardButton('2', callback_data='two')
-    btn3 = InlineKeyboardButton('3', callback_data='three')
-    btn4 = InlineKeyboardButton('4', callback_data='four')
-    btn5 = InlineKeyboardButton('5', callback_data='five')
-    btn6 = InlineKeyboardButton('Назад к альбомам', callback_data='mus_back')
-    keyboard.add(btn1, btn2, btn3, btn4, btn5)
-    keyboard.add(btn6)
-    bot.send_message(chat_id, f'Вы находитесь на {page} странице', reply_markup=keyboard)
-
-
-def bey_btn(message, page=1):
-    chat_id = message.chat.id
-    keyboard = InlineKeyboardMarkup(row_width=5)
-    btn1 = InlineKeyboardButton('1', callback_data='one_bey')
-    btn2 = InlineKeyboardButton('2', callback_data='two_bey')
-    btn3 = InlineKeyboardButton('Назад к альбомам', callback_data='mus_back')
-    keyboard.add(btn1, btn2)
-    keyboard.add(btn3)
-    bot.send_message(chat_id, f'Вы находитесь на {page} странице', reply_markup=keyboard)
-
-def kajiri_btn(message, page=1):
-    chat_id = message.chat.id
-    keyboard = InlineKeyboardMarkup(row_width=5)
-    btn1 = InlineKeyboardButton('1', callback_data='one_kajiri')
-    btn2 = InlineKeyboardButton('2', callback_data='two_kajiri')
-    btn3 = InlineKeyboardButton('3', callback_data='three_kajiri')
-    btn4 = InlineKeyboardButton('4', callback_data='four_kajiri')
-    btn6 = InlineKeyboardButton('Назад к альбомам', callback_data='mus_back')
-    keyboard.add(btn1, btn2, btn3, btn4)
-    keyboard.add(btn6)
-    bot.send_message(chat_id, f'Вы находитесь на {page} странице', reply_markup=keyboard)
-
-
 def fabula_song(message, page=1):
     db = get_album('Dies irae ~Acta est Fabula~ Original Soundtrack Neuen Welt Symphonie')
     chat_id = message.chat.id
-    media = []
-    if page == 1:
-        for music in db[:10]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        fabula_btn(message, page)
-    elif page == 2:
-        for music in db[10:20]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        fabula_btn(message, page)
-    elif page == 3:
-        for music in db[20:30]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        fabula_btn(message, page)
-    elif page == 4:
-        for music in db[30:40]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        fabula_btn(message, page)
-    elif page == 5:
-        for music in db[40:50]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        fabula_btn(message, page)
+    group_media(chat_id, page, db)
+    special_btn(chat_id, page, db, 'fabula')
 
 
 def zarathustra_song(message):
@@ -101,58 +61,28 @@ def zarathustra_song(message):
     bot.send_message(chat_id, 'Послушать другие альбомы:', reply_markup=keyboard)
 
 
-def amantes_song(message):
+def amantes_song(message, page=1):
     db = get_album('Dies irae ~Amantes amentes~ Ein Kleines Album')
     chat_id = message.chat.id
-    media = []
     keyboard = InlineKeyboardMarkup(row_width=1)
     btn1 = InlineKeyboardButton('Назад к альбомам', callback_data='mus_back')
     keyboard.add(btn1)
-    for music in db:
-        media.append(InputMediaAudio(media=music))
-    bot.send_media_group(chat_id, media=media)
+    group_media(chat_id, page, db)
     bot.send_message(chat_id, 'Послушать другие альбомы:', reply_markup=keyboard)
 
 
 def bey_song(message, page=1):
     db = get_album('Dies irae ~Interview with Kaziklu Bey~ - OST ｢Dominus tecum｣')
     chat_id = message.chat.id
-    media = []
-    if page == 1:
-        for music in db[:10]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        bey_btn(message, page)
-    elif page == 2:
-        for music in db[10:20]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        bey_btn(message, page)
+    group_media(chat_id, page, db)
+    special_btn(chat_id, page, db, 'bey')
+
 
 def kajiri_song(message, page=1):
     db = get_album('Kajiri Kamui Kagura Shinza no Utage')
     chat_id = message.chat.id
-    media = []
-    if page == 1:
-        for music in db[:10]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        kajiri_btn(message, page)
-    elif page == 2:
-        for music in db[10:20]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        kajiri_btn(message, page)
-    elif page == 3:
-        for music in db[20:30]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        kajiri_btn(message, page)
-    elif page == 4:
-        for music in db[30:40]:
-            media.append(InputMediaAudio(media=music))
-        bot.send_media_group(chat_id, media=media)
-        kajiri_btn(message, page)
+    group_media(chat_id, page, db)
+    special_btn(chat_id, page, db, 'kajiri')
 
 
 def del_funk(commands):
@@ -162,7 +92,24 @@ def del_funk(commands):
     except:
         None
 
+
+def special_handler(commands):
+    try:
+        func = commands.data.split(':')[0]
+        num = int(commands.data.split(':')[1])
+        if func == 'fabula':
+            fabula_song(commands.message, page=num)
+        elif func == 'kajiri':
+            kajiri_song(commands.message, page=num)
+        elif func == 'bey':
+            bey_song(commands.message, page=num)
+        del_funk(commands)
+    except IndexError:
+        None
+
+
 def music_btn(commands):
+    print(commands)
     if commands.data == 'mus_back':
         albums(commands.message)
         del_funk(commands)
@@ -178,38 +125,4 @@ def music_btn(commands):
         bey_song(commands.message)
     elif commands.data == 'Kajiri_cong':
         kajiri_song(commands.message)
-    elif commands.data == 'one':
-        fabula_song(commands.message, page=1)
-        del_funk(commands)
-    elif commands.data == 'two':
-        fabula_song(commands.message, page=2)
-        del_funk(commands)
-    elif commands.data == 'three':
-        fabula_song(commands.message, page=3)
-        del_funk(commands)
-    elif commands.data == 'four':
-        fabula_song(commands.message, page=4)
-        del_funk(commands)
-    elif commands.data == 'five':
-        fabula_song(commands.message, page=5)
-        del_funk(commands)
-    elif commands.data == 'one_bey':
-        bey_song(commands.message, page=1)
-        del_funk(commands)
-    elif commands.data == 'two_bey':
-        bey_song(commands.message, page=2) 
-        del_funk(commands)
-    elif commands.data == 'one_kajiri':
-        kajiri_song(commands.message, page=1) 
-        del_funk(commands)
-    elif commands.data == 'two_kajiri':
-        kajiri_song(commands.message, page=2) 
-        del_funk(commands)
-    elif commands.data == 'three_kajiri':
-        kajiri_song(commands.message, page=3)
-        del_funk(commands)
-    elif commands.data == 'four_kajiri':
-        kajiri_song(commands.message, page=4) 
-        del_funk(commands)
-    elif commands.data == 'del':
-        del_funk(commands)
+    special_handler(commands)
