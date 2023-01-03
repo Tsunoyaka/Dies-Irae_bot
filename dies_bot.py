@@ -72,10 +72,10 @@ def ferdowsi(message):
 
 
 def del_filter(commands):
-    if not commands.data in ['del', 'Delete', 'one', 'two', 'three', 'four', 'five', 'mus_back', 
-    'one_bey', 'two_bey', 'one_kajiri', 'two_kajiri', 'three_kajiri', 'four_kajiri']:
+    if not commands.data in ['Delete', 'fabula:1', 'fabula:2', 'fabula:3', 'fabula:4', 'fabula:5', 'mus_back', 
+    'bey:1', 'bey:2', 'kajiri:1', 'kajiri:2', 'kajiri:3', 'kajiri:4']:
         bot.delete_message(commands.message.chat.id, commands.message.message_id)
-    elif commands.data == 'Delete':
+    if commands.data == 'Delete':
         bot.delete_message(commands.message.chat.id, commands.message.message_id)
 
 
