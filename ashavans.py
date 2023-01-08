@@ -53,5 +53,5 @@ def ashavans_btn(commands):
     elif commands.data == 'Ashavans':
         ashavans(commands.message)
     elif commands.data in ['Sirius', 'Varhram', 'Nadare', 'Nahid', 'Magsarion', 'Quinn', 'Zurvan',
-    'Ferdowsi', 'Samluch', 'Alma', 'Ashozushta', 'Roxanne', 'Insesuto']:
+    'Ferdowsi', 'Samluch', 'Alma', 'Ashozushta', 'Roxanne', 'Insesuto', 'Ahura_Mazda']:
         super_ashavans(commands)
