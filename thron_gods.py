@@ -24,7 +24,7 @@ def send_character_page(message, page=1):
     )
     paginator.add_after(InlineKeyboardButton('В главное меню', callback_data='menu'))
     photo = get_db('download_photo')[page-1]['photo_download']
-    if db[page-1] != 'photo':
+    if db[page-1] != 'Photo':
         bot.send_photo(
             chat_id,
             photo=photo,
