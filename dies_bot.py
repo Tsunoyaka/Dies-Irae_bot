@@ -16,7 +16,7 @@ from get_db import (
 )
 from music import music_btn
 from decouple import config
-
+from random import randint
 
 bot = TeleBot(config('TOKEN'))
 
@@ -130,5 +130,11 @@ def inline(commands):
     saosyant_btn(commands)
     my_userdb(commands.message)
 
+
+@bot.message_handler(content_types=['text'])
+def spam(message):
+    chat_id = -1001600200328
+    photo = get_db('download_photo')[randint(1, 1000)]['photo_download']
+    bot.send_photo(chat_id, photo=photo)
 
 bot.polling(none_stop=True, interval=0)
